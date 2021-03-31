@@ -49,9 +49,6 @@ class Enemy {
                 this.x += this.speed;
         }
 
-
-
-
     }
     randomDirection(){
         // let curs = [this.direction,this.direction,this.direction,this.direction,this.direction];
