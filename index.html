@@ -6,30 +6,31 @@
     <script src="Snake.js"></script>
     <script src="Food.js"></script>
     <script src="enemy.js"></script>
+    <script src="game.js"></script>
 </head>
 <body>
 <canvas id="myCanvas" width="400px" height="400px"
         style="border: 1px solid black; background-image: url('http://blog.sklambert.com/wp-content/uploads/2012/09/bg.png')"></canvas>
 <p id="score"></p>
-<button onclick="refreshPage()">Bắt đầu </button>
+<button onclick="refreshPage()">Bắt đầu</button>
 <script>
 
     let score = 0;
     let paper = document.getElementById("myCanvas");
-    let snake = new Snake(50,300,200, 1);
-    let enemy = new Enemy(60, 300, 100,10, "red");
+    let snake = new Snake(50, 300, 200, 1);
+    let enemy = new Enemy(60, 300, 100, 10, "red");
     let enemy2 = new Enemy(60, 300, 100, 8, "green");
-    let enemy3 = new Enemy(60, 300, 100, 1,"blue");
+    let enemy3 = new Enemy(60, 300, 100, 1, "blue");
     let food = new Food(40, randomNumber(0, paper.width - 20), randomNumber(0, paper.height - 20));
-    let enemies = [enemy,enemy2,enemy3];
+    let enemies = [enemy, enemy2, enemy3];
     food.draw(paper);
     snake.draw(paper);
     enemy.draw(paper);
     enemy2.draw(paper);
     enemy3.draw(paper);
-/*
-    enemy2.draw(paper);
-*/
+    /*
+        enemy2.draw(paper);
+    */
 
     //clearRect() Xóa màn hình canvas;
     function clearScreen() {
@@ -62,10 +63,6 @@
         moveSnake();
         moveEnemy();
         gameOver();
-
-        /*
-                enemy.showImg(paper);
-        */
         food.showImage(paper);
         display();
     }
@@ -80,11 +77,13 @@
         let int = Math.floor(rand) + min;
         return int;
     }
+
     function spawnFood() {
         food.x = randomNumber(0, paper.width - 20);
         food.y = randomNumber(0, paper.height - 20);
     }
-// Hiển thị điểm
+
+    // Hiển thị điểm
     function display() {
         document.getElementById('score').innerText = "score:" + score;
     }
@@ -96,28 +95,30 @@
             enemies[i].showImg(paper);
         }
     }
+
     function moveSnake() {
         gameOver();
         snake.move();
         snake.eat(food);
-      /*  snake.enemyHit(enemy);
+        snake.enemyHit(enemy);
         snake.enemyHit(enemy2);
-        snake.enemyHit(enemy3);*/
+        snake.enemyHit(enemy3);
         snake.drawImg(paper);
         snake.checkWall(paper);
     }
 
-    function refreshPage(){
+    function refreshPage() {
         window.location.reload();
     }
 
-    function gameOver(){
-        if(snake.enemyHit(enemy) === true){
+    function gameOver() {
+        if (snake.enemyHit(enemy) === true) {
             /*snake.endGame();*/
-            location.reload();
+            let a = new Game(0, 0, 500, 500, "red");
+            a.draw(paper);
+            window.location.reload();
         }
     }
-
 </script>
 </body>
 </html>
